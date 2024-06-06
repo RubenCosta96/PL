@@ -1,0 +1,938 @@
+Created by PLY version 3.11 (http://www.dabeaz.com/ply)
+
+Unused terminals:
+
+    aleatorio
+    comment
+    comment_multi
+    entrada
+    fold
+    map
+
+Grammar
+
+Rule 0     S' -> program
+Rule 1     program -> statement_list
+Rule 2     statement_list -> statement_list statement
+Rule 3     statement_list -> statement
+Rule 4     statement -> assignment ;
+Rule 5     statement -> write_statement ;
+Rule 6     statement -> function_definition ;
+Rule 7     assignment -> var = expression
+Rule 8     assignment -> var ? = expression
+Rule 9     assignment -> var ! = expression
+Rule 10    assignment -> var = lista
+Rule 11    write_statement -> escrever ( expression )
+Rule 12    write_statement -> escrever ( string )
+Rule 13    write_statement -> escrever ( lista )
+Rule 14    expression -> expression + term
+Rule 15    expression -> expression - term
+Rule 16    expression -> expression concat expression
+Rule 17    expression -> term
+Rule 18    term -> term * factor
+Rule 19    term -> term / factor
+Rule 20    term -> factor
+Rule 21    factor -> num
+Rule 22    factor -> var
+Rule 23    factor -> lista
+Rule 24    factor -> string
+Rule 25    factor -> ( expression )
+Rule 26    list -> [ elements ]
+Rule 27    elements -> elements , expression
+Rule 28    elements -> expression
+Rule 29    function_definition -> funcao var ( parameter_list ) : statement_list fim
+Rule 30    parameter_list -> parameter_list , var
+Rule 31    parameter_list -> var
+
+Terminals, with rules where they appear
+
+!                    : 9
+(                    : 11 12 13 25 29
+)                    : 11 12 13 25 29
+*                    : 18
++                    : 14
+,                    : 27 30
+-                    : 15
+/                    : 19
+:                    : 29
+;                    : 4 5 6
+=                    : 7 8 9 10
+?                    : 8
+[                    : 26
+]                    : 26
+aleatorio            : 
+comment              : 
+comment_multi        : 
+concat               : 16
+entrada              : 
+error                : 
+escrever             : 11 12 13
+fim                  : 29
+fold                 : 
+funcao               : 29
+lista                : 10 13 23
+map                  : 
+num                  : 21
+string               : 12 24
+var                  : 7 8 9 10 22 29 30 31
+
+Nonterminals, with rules where they appear
+
+assignment           : 4
+elements             : 26 27
+expression           : 7 8 9 11 14 15 16 16 25 27 28
+factor               : 18 19 20
+function_definition  : 6
+list                 : 
+parameter_list       : 29 30
+program              : 0
+statement            : 2 3
+statement_list       : 1 2 29
+term                 : 14 15 17 18 19
+write_statement      : 5
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . program
+    (1) program -> . statement_list
+    (2) statement_list -> . statement_list statement
+    (3) statement_list -> . statement
+    (4) statement -> . assignment ;
+    (5) statement -> . write_statement ;
+    (6) statement -> . function_definition ;
+    (7) assignment -> . var = expression
+    (8) assignment -> . var ? = expression
+    (9) assignment -> . var ! = expression
+    (10) assignment -> . var = lista
+    (11) write_statement -> . escrever ( expression )
+    (12) write_statement -> . escrever ( string )
+    (13) write_statement -> . escrever ( lista )
+    (29) function_definition -> . funcao var ( parameter_list ) : statement_list fim
+
+    var             shift and go to state 7
+    escrever        shift and go to state 8
+    funcao          shift and go to state 9
+
+    program                        shift and go to state 1
+    statement_list                 shift and go to state 2
+    statement                      shift and go to state 3
+    assignment                     shift and go to state 4
+    write_statement                shift and go to state 5
+    function_definition            shift and go to state 6
+
+state 1
+
+    (0) S' -> program .
+
+
+
+state 2
+
+    (1) program -> statement_list .
+    (2) statement_list -> statement_list . statement
+    (4) statement -> . assignment ;
+    (5) statement -> . write_statement ;
+    (6) statement -> . function_definition ;
+    (7) assignment -> . var = expression
+    (8) assignment -> . var ? = expression
+    (9) assignment -> . var ! = expression
+    (10) assignment -> . var = lista
+    (11) write_statement -> . escrever ( expression )
+    (12) write_statement -> . escrever ( string )
+    (13) write_statement -> . escrever ( lista )
+    (29) function_definition -> . funcao var ( parameter_list ) : statement_list fim
+
+    $end            reduce using rule 1 (program -> statement_list .)
+    var             shift and go to state 7
+    escrever        shift and go to state 8
+    funcao          shift and go to state 9
+
+    statement                      shift and go to state 10
+    assignment                     shift and go to state 4
+    write_statement                shift and go to state 5
+    function_definition            shift and go to state 6
+
+state 3
+
+    (3) statement_list -> statement .
+
+    var             reduce using rule 3 (statement_list -> statement .)
+    escrever        reduce using rule 3 (statement_list -> statement .)
+    funcao          reduce using rule 3 (statement_list -> statement .)
+    $end            reduce using rule 3 (statement_list -> statement .)
+    fim             reduce using rule 3 (statement_list -> statement .)
+
+
+state 4
+
+    (4) statement -> assignment . ;
+
+    ;               shift and go to state 11
+
+
+state 5
+
+    (5) statement -> write_statement . ;
+
+    ;               shift and go to state 12
+
+
+state 6
+
+    (6) statement -> function_definition . ;
+
+    ;               shift and go to state 13
+
+
+state 7
+
+    (7) assignment -> var . = expression
+    (8) assignment -> var . ? = expression
+    (9) assignment -> var . ! = expression
+    (10) assignment -> var . = lista
+
+    =               shift and go to state 14
+    ?               shift and go to state 15
+    !               shift and go to state 16
+
+
+state 8
+
+    (11) write_statement -> escrever . ( expression )
+    (12) write_statement -> escrever . ( string )
+    (13) write_statement -> escrever . ( lista )
+
+    (               shift and go to state 17
+
+
+state 9
+
+    (29) function_definition -> funcao . var ( parameter_list ) : statement_list fim
+
+    var             shift and go to state 18
+
+
+state 10
+
+    (2) statement_list -> statement_list statement .
+
+    var             reduce using rule 2 (statement_list -> statement_list statement .)
+    escrever        reduce using rule 2 (statement_list -> statement_list statement .)
+    funcao          reduce using rule 2 (statement_list -> statement_list statement .)
+    $end            reduce using rule 2 (statement_list -> statement_list statement .)
+    fim             reduce using rule 2 (statement_list -> statement_list statement .)
+
+
+state 11
+
+    (4) statement -> assignment ; .
+
+    var             reduce using rule 4 (statement -> assignment ; .)
+    escrever        reduce using rule 4 (statement -> assignment ; .)
+    funcao          reduce using rule 4 (statement -> assignment ; .)
+    $end            reduce using rule 4 (statement -> assignment ; .)
+    fim             reduce using rule 4 (statement -> assignment ; .)
+
+
+state 12
+
+    (5) statement -> write_statement ; .
+
+    var             reduce using rule 5 (statement -> write_statement ; .)
+    escrever        reduce using rule 5 (statement -> write_statement ; .)
+    funcao          reduce using rule 5 (statement -> write_statement ; .)
+    $end            reduce using rule 5 (statement -> write_statement ; .)
+    fim             reduce using rule 5 (statement -> write_statement ; .)
+
+
+state 13
+
+    (6) statement -> function_definition ; .
+
+    var             reduce using rule 6 (statement -> function_definition ; .)
+    escrever        reduce using rule 6 (statement -> function_definition ; .)
+    funcao          reduce using rule 6 (statement -> function_definition ; .)
+    $end            reduce using rule 6 (statement -> function_definition ; .)
+    fim             reduce using rule 6 (statement -> function_definition ; .)
+
+
+state 14
+
+    (7) assignment -> var = . expression
+    (10) assignment -> var = . lista
+    (14) expression -> . expression + term
+    (15) expression -> . expression - term
+    (16) expression -> . expression concat expression
+    (17) expression -> . term
+    (18) term -> . term * factor
+    (19) term -> . term / factor
+    (20) term -> . factor
+    (21) factor -> . num
+    (22) factor -> . var
+    (23) factor -> . lista
+    (24) factor -> . string
+    (25) factor -> . ( expression )
+
+    lista           shift and go to state 21
+    num             shift and go to state 24
+    var             shift and go to state 19
+    string          shift and go to state 25
+    (               shift and go to state 26
+
+    expression                     shift and go to state 20
+    term                           shift and go to state 22
+    factor                         shift and go to state 23
+
+state 15
+
+    (8) assignment -> var ? . = expression
+
+    =               shift and go to state 27
+
+
+state 16
+
+    (9) assignment -> var ! . = expression
+
+    =               shift and go to state 28
+
+
+state 17
+
+    (11) write_statement -> escrever ( . expression )
+    (12) write_statement -> escrever ( . string )
+    (13) write_statement -> escrever ( . lista )
+    (14) expression -> . expression + term
+    (15) expression -> . expression - term
+    (16) expression -> . expression concat expression
+    (17) expression -> . term
+    (18) term -> . term * factor
+    (19) term -> . term / factor
+    (20) term -> . factor
+    (21) factor -> . num
+    (22) factor -> . var
+    (23) factor -> . lista
+    (24) factor -> . string
+    (25) factor -> . ( expression )
+
+    string          shift and go to state 30
+    lista           shift and go to state 31
+    num             shift and go to state 24
+    var             shift and go to state 19
+    (               shift and go to state 26
+
+    expression                     shift and go to state 29
+    term                           shift and go to state 22
+    factor                         shift and go to state 23
+
+state 18
+
+    (29) function_definition -> funcao var . ( parameter_list ) : statement_list fim
+
+    (               shift and go to state 32
+
+
+state 19
+
+    (22) factor -> var .
+
+    *               reduce using rule 22 (factor -> var .)
+    /               reduce using rule 22 (factor -> var .)
+    +               reduce using rule 22 (factor -> var .)
+    -               reduce using rule 22 (factor -> var .)
+    concat          reduce using rule 22 (factor -> var .)
+    ;               reduce using rule 22 (factor -> var .)
+    )               reduce using rule 22 (factor -> var .)
+
+
+state 20
+
+    (7) assignment -> var = expression .
+    (14) expression -> expression . + term
+    (15) expression -> expression . - term
+    (16) expression -> expression . concat expression
+
+    ;               reduce using rule 7 (assignment -> var = expression .)
+    +               shift and go to state 33
+    -               shift and go to state 34
+    concat          shift and go to state 35
+
+
+state 21
+
+    (10) assignment -> var = lista .
+    (23) factor -> lista .
+
+  ! reduce/reduce conflict for ; resolved using rule 10 (assignment -> var = lista .)
+    ;               reduce using rule 10 (assignment -> var = lista .)
+    *               reduce using rule 23 (factor -> lista .)
+    /               reduce using rule 23 (factor -> lista .)
+    +               reduce using rule 23 (factor -> lista .)
+    -               reduce using rule 23 (factor -> lista .)
+    concat          reduce using rule 23 (factor -> lista .)
+
+  ! ;               [ reduce using rule 23 (factor -> lista .) ]
+
+
+state 22
+
+    (17) expression -> term .
+    (18) term -> term . * factor
+    (19) term -> term . / factor
+
+    +               reduce using rule 17 (expression -> term .)
+    -               reduce using rule 17 (expression -> term .)
+    concat          reduce using rule 17 (expression -> term .)
+    ;               reduce using rule 17 (expression -> term .)
+    )               reduce using rule 17 (expression -> term .)
+    *               shift and go to state 36
+    /               shift and go to state 37
+
+
+state 23
+
+    (20) term -> factor .
+
+    *               reduce using rule 20 (term -> factor .)
+    /               reduce using rule 20 (term -> factor .)
+    +               reduce using rule 20 (term -> factor .)
+    -               reduce using rule 20 (term -> factor .)
+    concat          reduce using rule 20 (term -> factor .)
+    ;               reduce using rule 20 (term -> factor .)
+    )               reduce using rule 20 (term -> factor .)
+
+
+state 24
+
+    (21) factor -> num .
+
+    *               reduce using rule 21 (factor -> num .)
+    /               reduce using rule 21 (factor -> num .)
+    +               reduce using rule 21 (factor -> num .)
+    -               reduce using rule 21 (factor -> num .)
+    concat          reduce using rule 21 (factor -> num .)
+    ;               reduce using rule 21 (factor -> num .)
+    )               reduce using rule 21 (factor -> num .)
+
+
+state 25
+
+    (24) factor -> string .
+
+    *               reduce using rule 24 (factor -> string .)
+    /               reduce using rule 24 (factor -> string .)
+    +               reduce using rule 24 (factor -> string .)
+    -               reduce using rule 24 (factor -> string .)
+    concat          reduce using rule 24 (factor -> string .)
+    ;               reduce using rule 24 (factor -> string .)
+    )               reduce using rule 24 (factor -> string .)
+
+
+state 26
+
+    (25) factor -> ( . expression )
+    (14) expression -> . expression + term
+    (15) expression -> . expression - term
+    (16) expression -> . expression concat expression
+    (17) expression -> . term
+    (18) term -> . term * factor
+    (19) term -> . term / factor
+    (20) term -> . factor
+    (21) factor -> . num
+    (22) factor -> . var
+    (23) factor -> . lista
+    (24) factor -> . string
+    (25) factor -> . ( expression )
+
+    num             shift and go to state 24
+    var             shift and go to state 19
+    lista           shift and go to state 39
+    string          shift and go to state 25
+    (               shift and go to state 26
+
+    expression                     shift and go to state 38
+    term                           shift and go to state 22
+    factor                         shift and go to state 23
+
+state 27
+
+    (8) assignment -> var ? = . expression
+    (14) expression -> . expression + term
+    (15) expression -> . expression - term
+    (16) expression -> . expression concat expression
+    (17) expression -> . term
+    (18) term -> . term * factor
+    (19) term -> . term / factor
+    (20) term -> . factor
+    (21) factor -> . num
+    (22) factor -> . var
+    (23) factor -> . lista
+    (24) factor -> . string
+    (25) factor -> . ( expression )
+
+    num             shift and go to state 24
+    var             shift and go to state 19
+    lista           shift and go to state 39
+    string          shift and go to state 25
+    (               shift and go to state 26
+
+    expression                     shift and go to state 40
+    term                           shift and go to state 22
+    factor                         shift and go to state 23
+
+state 28
+
+    (9) assignment -> var ! = . expression
+    (14) expression -> . expression + term
+    (15) expression -> . expression - term
+    (16) expression -> . expression concat expression
+    (17) expression -> . term
+    (18) term -> . term * factor
+    (19) term -> . term / factor
+    (20) term -> . factor
+    (21) factor -> . num
+    (22) factor -> . var
+    (23) factor -> . lista
+    (24) factor -> . string
+    (25) factor -> . ( expression )
+
+    num             shift and go to state 24
+    var             shift and go to state 19
+    lista           shift and go to state 39
+    string          shift and go to state 25
+    (               shift and go to state 26
+
+    expression                     shift and go to state 41
+    term                           shift and go to state 22
+    factor                         shift and go to state 23
+
+state 29
+
+    (11) write_statement -> escrever ( expression . )
+    (14) expression -> expression . + term
+    (15) expression -> expression . - term
+    (16) expression -> expression . concat expression
+
+    )               shift and go to state 42
+    +               shift and go to state 33
+    -               shift and go to state 34
+    concat          shift and go to state 35
+
+
+state 30
+
+    (12) write_statement -> escrever ( string . )
+    (24) factor -> string .
+
+  ! shift/reduce conflict for ) resolved as shift
+    )               shift and go to state 43
+    *               reduce using rule 24 (factor -> string .)
+    /               reduce using rule 24 (factor -> string .)
+    +               reduce using rule 24 (factor -> string .)
+    -               reduce using rule 24 (factor -> string .)
+    concat          reduce using rule 24 (factor -> string .)
+
+  ! )               [ reduce using rule 24 (factor -> string .) ]
+
+
+state 31
+
+    (13) write_statement -> escrever ( lista . )
+    (23) factor -> lista .
+
+  ! shift/reduce conflict for ) resolved as shift
+    )               shift and go to state 44
+    *               reduce using rule 23 (factor -> lista .)
+    /               reduce using rule 23 (factor -> lista .)
+    +               reduce using rule 23 (factor -> lista .)
+    -               reduce using rule 23 (factor -> lista .)
+    concat          reduce using rule 23 (factor -> lista .)
+
+  ! )               [ reduce using rule 23 (factor -> lista .) ]
+
+
+state 32
+
+    (29) function_definition -> funcao var ( . parameter_list ) : statement_list fim
+    (30) parameter_list -> . parameter_list , var
+    (31) parameter_list -> . var
+
+    var             shift and go to state 45
+
+    parameter_list                 shift and go to state 46
+
+state 33
+
+    (14) expression -> expression + . term
+    (18) term -> . term * factor
+    (19) term -> . term / factor
+    (20) term -> . factor
+    (21) factor -> . num
+    (22) factor -> . var
+    (23) factor -> . lista
+    (24) factor -> . string
+    (25) factor -> . ( expression )
+
+    num             shift and go to state 24
+    var             shift and go to state 19
+    lista           shift and go to state 39
+    string          shift and go to state 25
+    (               shift and go to state 26
+
+    term                           shift and go to state 47
+    factor                         shift and go to state 23
+
+state 34
+
+    (15) expression -> expression - . term
+    (18) term -> . term * factor
+    (19) term -> . term / factor
+    (20) term -> . factor
+    (21) factor -> . num
+    (22) factor -> . var
+    (23) factor -> . lista
+    (24) factor -> . string
+    (25) factor -> . ( expression )
+
+    num             shift and go to state 24
+    var             shift and go to state 19
+    lista           shift and go to state 39
+    string          shift and go to state 25
+    (               shift and go to state 26
+
+    term                           shift and go to state 48
+    factor                         shift and go to state 23
+
+state 35
+
+    (16) expression -> expression concat . expression
+    (14) expression -> . expression + term
+    (15) expression -> . expression - term
+    (16) expression -> . expression concat expression
+    (17) expression -> . term
+    (18) term -> . term * factor
+    (19) term -> . term / factor
+    (20) term -> . factor
+    (21) factor -> . num
+    (22) factor -> . var
+    (23) factor -> . lista
+    (24) factor -> . string
+    (25) factor -> . ( expression )
+
+    num             shift and go to state 24
+    var             shift and go to state 19
+    lista           shift and go to state 39
+    string          shift and go to state 25
+    (               shift and go to state 26
+
+    expression                     shift and go to state 49
+    term                           shift and go to state 22
+    factor                         shift and go to state 23
+
+state 36
+
+    (18) term -> term * . factor
+    (21) factor -> . num
+    (22) factor -> . var
+    (23) factor -> . lista
+    (24) factor -> . string
+    (25) factor -> . ( expression )
+
+    num             shift and go to state 24
+    var             shift and go to state 19
+    lista           shift and go to state 39
+    string          shift and go to state 25
+    (               shift and go to state 26
+
+    factor                         shift and go to state 50
+
+state 37
+
+    (19) term -> term / . factor
+    (21) factor -> . num
+    (22) factor -> . var
+    (23) factor -> . lista
+    (24) factor -> . string
+    (25) factor -> . ( expression )
+
+    num             shift and go to state 24
+    var             shift and go to state 19
+    lista           shift and go to state 39
+    string          shift and go to state 25
+    (               shift and go to state 26
+
+    factor                         shift and go to state 51
+
+state 38
+
+    (25) factor -> ( expression . )
+    (14) expression -> expression . + term
+    (15) expression -> expression . - term
+    (16) expression -> expression . concat expression
+
+    )               shift and go to state 52
+    +               shift and go to state 33
+    -               shift and go to state 34
+    concat          shift and go to state 35
+
+
+state 39
+
+    (23) factor -> lista .
+
+    *               reduce using rule 23 (factor -> lista .)
+    /               reduce using rule 23 (factor -> lista .)
+    )               reduce using rule 23 (factor -> lista .)
+    +               reduce using rule 23 (factor -> lista .)
+    -               reduce using rule 23 (factor -> lista .)
+    concat          reduce using rule 23 (factor -> lista .)
+    ;               reduce using rule 23 (factor -> lista .)
+
+
+state 40
+
+    (8) assignment -> var ? = expression .
+    (14) expression -> expression . + term
+    (15) expression -> expression . - term
+    (16) expression -> expression . concat expression
+
+    ;               reduce using rule 8 (assignment -> var ? = expression .)
+    +               shift and go to state 33
+    -               shift and go to state 34
+    concat          shift and go to state 35
+
+
+state 41
+
+    (9) assignment -> var ! = expression .
+    (14) expression -> expression . + term
+    (15) expression -> expression . - term
+    (16) expression -> expression . concat expression
+
+    ;               reduce using rule 9 (assignment -> var ! = expression .)
+    +               shift and go to state 33
+    -               shift and go to state 34
+    concat          shift and go to state 35
+
+
+state 42
+
+    (11) write_statement -> escrever ( expression ) .
+
+    ;               reduce using rule 11 (write_statement -> escrever ( expression ) .)
+
+
+state 43
+
+    (12) write_statement -> escrever ( string ) .
+
+    ;               reduce using rule 12 (write_statement -> escrever ( string ) .)
+
+
+state 44
+
+    (13) write_statement -> escrever ( lista ) .
+
+    ;               reduce using rule 13 (write_statement -> escrever ( lista ) .)
+
+
+state 45
+
+    (31) parameter_list -> var .
+
+    )               reduce using rule 31 (parameter_list -> var .)
+    ,               reduce using rule 31 (parameter_list -> var .)
+
+
+state 46
+
+    (29) function_definition -> funcao var ( parameter_list . ) : statement_list fim
+    (30) parameter_list -> parameter_list . , var
+
+    )               shift and go to state 53
+    ,               shift and go to state 54
+
+
+state 47
+
+    (14) expression -> expression + term .
+    (18) term -> term . * factor
+    (19) term -> term . / factor
+
+    +               reduce using rule 14 (expression -> expression + term .)
+    -               reduce using rule 14 (expression -> expression + term .)
+    concat          reduce using rule 14 (expression -> expression + term .)
+    ;               reduce using rule 14 (expression -> expression + term .)
+    )               reduce using rule 14 (expression -> expression + term .)
+    *               shift and go to state 36
+    /               shift and go to state 37
+
+
+state 48
+
+    (15) expression -> expression - term .
+    (18) term -> term . * factor
+    (19) term -> term . / factor
+
+    +               reduce using rule 15 (expression -> expression - term .)
+    -               reduce using rule 15 (expression -> expression - term .)
+    concat          reduce using rule 15 (expression -> expression - term .)
+    ;               reduce using rule 15 (expression -> expression - term .)
+    )               reduce using rule 15 (expression -> expression - term .)
+    *               shift and go to state 36
+    /               shift and go to state 37
+
+
+state 49
+
+    (16) expression -> expression concat expression .
+    (14) expression -> expression . + term
+    (15) expression -> expression . - term
+    (16) expression -> expression . concat expression
+
+  ! shift/reduce conflict for + resolved as shift
+  ! shift/reduce conflict for - resolved as shift
+  ! shift/reduce conflict for concat resolved as shift
+    ;               reduce using rule 16 (expression -> expression concat expression .)
+    )               reduce using rule 16 (expression -> expression concat expression .)
+    +               shift and go to state 33
+    -               shift and go to state 34
+    concat          shift and go to state 35
+
+  ! +               [ reduce using rule 16 (expression -> expression concat expression .) ]
+  ! -               [ reduce using rule 16 (expression -> expression concat expression .) ]
+  ! concat          [ reduce using rule 16 (expression -> expression concat expression .) ]
+
+
+state 50
+
+    (18) term -> term * factor .
+
+    *               reduce using rule 18 (term -> term * factor .)
+    /               reduce using rule 18 (term -> term * factor .)
+    +               reduce using rule 18 (term -> term * factor .)
+    -               reduce using rule 18 (term -> term * factor .)
+    concat          reduce using rule 18 (term -> term * factor .)
+    ;               reduce using rule 18 (term -> term * factor .)
+    )               reduce using rule 18 (term -> term * factor .)
+
+
+state 51
+
+    (19) term -> term / factor .
+
+    *               reduce using rule 19 (term -> term / factor .)
+    /               reduce using rule 19 (term -> term / factor .)
+    +               reduce using rule 19 (term -> term / factor .)
+    -               reduce using rule 19 (term -> term / factor .)
+    concat          reduce using rule 19 (term -> term / factor .)
+    ;               reduce using rule 19 (term -> term / factor .)
+    )               reduce using rule 19 (term -> term / factor .)
+
+
+state 52
+
+    (25) factor -> ( expression ) .
+
+    *               reduce using rule 25 (factor -> ( expression ) .)
+    /               reduce using rule 25 (factor -> ( expression ) .)
+    +               reduce using rule 25 (factor -> ( expression ) .)
+    -               reduce using rule 25 (factor -> ( expression ) .)
+    concat          reduce using rule 25 (factor -> ( expression ) .)
+    ;               reduce using rule 25 (factor -> ( expression ) .)
+    )               reduce using rule 25 (factor -> ( expression ) .)
+
+
+state 53
+
+    (29) function_definition -> funcao var ( parameter_list ) . : statement_list fim
+
+    :               shift and go to state 55
+
+
+state 54
+
+    (30) parameter_list -> parameter_list , . var
+
+    var             shift and go to state 56
+
+
+state 55
+
+    (29) function_definition -> funcao var ( parameter_list ) : . statement_list fim
+    (2) statement_list -> . statement_list statement
+    (3) statement_list -> . statement
+    (4) statement -> . assignment ;
+    (5) statement -> . write_statement ;
+    (6) statement -> . function_definition ;
+    (7) assignment -> . var = expression
+    (8) assignment -> . var ? = expression
+    (9) assignment -> . var ! = expression
+    (10) assignment -> . var = lista
+    (11) write_statement -> . escrever ( expression )
+    (12) write_statement -> . escrever ( string )
+    (13) write_statement -> . escrever ( lista )
+    (29) function_definition -> . funcao var ( parameter_list ) : statement_list fim
+
+    var             shift and go to state 7
+    escrever        shift and go to state 8
+    funcao          shift and go to state 9
+
+    statement_list                 shift and go to state 57
+    statement                      shift and go to state 3
+    assignment                     shift and go to state 4
+    write_statement                shift and go to state 5
+    function_definition            shift and go to state 6
+
+state 56
+
+    (30) parameter_list -> parameter_list , var .
+
+    )               reduce using rule 30 (parameter_list -> parameter_list , var .)
+    ,               reduce using rule 30 (parameter_list -> parameter_list , var .)
+
+
+state 57
+
+    (29) function_definition -> funcao var ( parameter_list ) : statement_list . fim
+    (2) statement_list -> statement_list . statement
+    (4) statement -> . assignment ;
+    (5) statement -> . write_statement ;
+    (6) statement -> . function_definition ;
+    (7) assignment -> . var = expression
+    (8) assignment -> . var ? = expression
+    (9) assignment -> . var ! = expression
+    (10) assignment -> . var = lista
+    (11) write_statement -> . escrever ( expression )
+    (12) write_statement -> . escrever ( string )
+    (13) write_statement -> . escrever ( lista )
+    (29) function_definition -> . funcao var ( parameter_list ) : statement_list fim
+
+    fim             shift and go to state 58
+    var             shift and go to state 7
+    escrever        shift and go to state 8
+    funcao          shift and go to state 9
+
+    statement                      shift and go to state 10
+    assignment                     shift and go to state 4
+    write_statement                shift and go to state 5
+    function_definition            shift and go to state 6
+
+state 58
+
+    (29) function_definition -> funcao var ( parameter_list ) : statement_list fim .
+
+    ;               reduce using rule 29 (function_definition -> funcao var ( parameter_list ) : statement_list fim .)
+
+WARNING: 
+WARNING: Conflicts:
+WARNING: 
+WARNING: shift/reduce conflict for ) in state 30 resolved as shift
+WARNING: shift/reduce conflict for ) in state 31 resolved as shift
+WARNING: shift/reduce conflict for + in state 49 resolved as shift
+WARNING: shift/reduce conflict for - in state 49 resolved as shift
+WARNING: shift/reduce conflict for concat in state 49 resolved as shift
+WARNING: reduce/reduce conflict in state 21 resolved using rule (assignment -> var = lista)
+WARNING: rejected rule (factor -> lista) in state 21
